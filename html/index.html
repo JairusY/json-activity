@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div><img src="img/bg.jpg" alt=""></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <style>
+        .video-preview {
+        display: inline-block;
+        }
+    </style>
+    <div class="container video-preview" id="card">
+        <script>
+            //Syntax to fetch data from index.php
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "http://json-activity.test/php/cars.php");
+            xmlhttp.send();
+            xmlhttp.onload = function() {
+                const cars = JSON.parse(this.responseText).cars;
+                const table = document.getElementById('card');
+                if(table){
+                for(const i in cars){
+                    const row =`
+                    <div class="video-preview">
+                        <div class="main">
+                            <ul class="cards">
+                            <li class="cards_item">
+                                <div class="card">
+                                    <div class="card_image"><img src="${cars[i].img}" alt=""></div>
+                                <div class="card_content">
+                                    <h2 class="card_title">${cars[i].brand}</h2>
+                                    <div class="card_text">
+                                    <h3>${cars[i].type}</h3>
+                                    <h3>${cars[i].model}</h3>
+                                    <h3>${cars[i].engine}</h3>
+                                    <hr />
+                                    
+                                    <p>${cars[i].transmission}
+                                    </p>
+                                    </div>
+                                </div>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>   
+                        `;
+                        table.innerHTML += row;
+                    }
+                    }
+                }
+            //To catch errors
+            //.catch(error => console.error(error));
+        </script>
+    </div>
+</body>
+</html>
